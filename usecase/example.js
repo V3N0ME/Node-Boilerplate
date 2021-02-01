@@ -6,7 +6,7 @@ class ExampleUsecase {
   }
 
   login(username, password) {
-    return new Promise(async (resolve, resolve) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const resp = await this.exampleRepo.login(username, password);
         resolve(resp);
