@@ -1,14 +1,21 @@
 const jwt = require("../services/jwt");
 
 const unProtectedRoutes = {
-  "/example/login": true,
-  "/example": true
-};
+  "/user": {
+    methods: { post: true }
+  },
+  "/user/login": {
+    method: { get: true }
+  }
+}
 
-async function auth(req, res, next) {
-  if (unProtectedRoutes[req.path] === true) {
-    next();
-    return;
+async function auth (req, res, next) {
+  if (
+    unProtectedRoutes[req.path] &&
+    unProtectedRoutes[req.path]["method"][req.method.toLowerCase()]
+  ) {
+    next()
+    return
   }
 
   try {
