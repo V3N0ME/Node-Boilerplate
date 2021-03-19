@@ -5,14 +5,14 @@ const unProtectedRoutes = {
     methods: { post: true }
   },
   "/user/login": {
-    method: { get: true }
+    methods: { get: true }
   }
 }
 
 async function auth (req, res, next) {
   if (
     unProtectedRoutes[req.path] &&
-    unProtectedRoutes[req.path]["method"][req.method.toLowerCase()]
+    unProtectedRoutes[req.path]["methods"][req.method.toLowerCase()]
   ) {
     next()
     return
