@@ -6,7 +6,7 @@ class ExampleRepository {
   }
 
   login(username, password) {
-    return new Promise((resolve, resolve) => {
+    return new Promise((resolve, reject) => {
       this.db.query(
         "SELECT id, details FROM users WHERE username = ? AND password = ?",
         [username, password],

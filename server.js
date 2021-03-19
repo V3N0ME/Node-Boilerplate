@@ -1,5 +1,9 @@
 global.env =
-  process.env.NODE_ENV === undefined ? "development" : process.env.NODE_ENV;
+  process.env.NODE_ENV === undefined ? "development" : process.env.NODE_ENV
+global.isDev = () => {
+  return global.env === "development"
+}
+
 const PORT = process.env.PORT === undefined ? 8080 : process.env.PORT;
 
 const express = require("express");
@@ -40,7 +44,7 @@ class Server {
       PUT: "\x1b[33m",
     };
     app.use("*", (req, _, next) => {
-      if (global.env === "development") {
+      if (global.isDev()) {
         console.log(colours[req.method] + req.method, "\x1b[0m" + req.baseUrl);
       }
       next();

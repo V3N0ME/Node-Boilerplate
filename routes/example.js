@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Joi = require("@hapi/joi");
+const respondError = require("../utils/http")
 
 class ExampleRoutes {
   constructor(usecase) {
@@ -38,11 +39,7 @@ class ExampleRoutes {
 
         res.json(getUserDetails);
       } catch (err) {
-        if (err.name === "ValidationError") {
-          res.json({ code: 422, msg: err.toString() });
-        } else {
-          res.json({ code: 500, msg: "An error occurred !" });
-        }
+        respondError(res, err)
       }
 
       res.end();
